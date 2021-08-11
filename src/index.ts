@@ -1,7 +1,10 @@
 import express from "express";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+app.get("/", (request, response) => {    
+      response.send(`<h1>Hello </h1>`);    
+  });
 app.get("/api/greetings", (request, response) => {
   let userName = request.query.name;
   if (userName === undefined) {
