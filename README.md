@@ -5,4 +5,4 @@
 
 ### Learning to work with routing and CRUD operations
 [heroku](https://itechart-lab-nodejs.herokuapp.com/api/notes)
-[PostmanCollection] (https://www.getpostman.com/collections/f1fef2d41bb1e44ec7db)
+[postman](https://www.getpostman.com/collections/f1fef2d41bb1e44ec7db)
