@@ -1,4 +1,4 @@
-import {Note} from "../config/types";
+import {Note} from "../config/note";
 
 const notes: Array<Note> = [];
 const allNotes = (): Array<Note> => {
