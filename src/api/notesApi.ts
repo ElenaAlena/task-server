@@ -1,22 +1,64 @@
-import {Note} from "../config/note";
+import { MongoClient } from "mongodb";
+
+import { Note } from "../config/note";
+
+const uri =
+  "mongodb+srv://Alena:cvbncvbn@cluster0.sdybg.mongodb.net/ITECHART-LAB-NODEJS?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
 
 const notes: Array<Note> = [];
 const allNotes = (): Array<Note> => {
   return notes;
 };
-const addNote = (note: Note): Note => {
-  notes.push(note);
+const addNote = async (note: Note): Promise<Note> => {
+  try{
+    await client.connect();
+    const database = client.db("notes");
+    const notesCollection = database.collection("notes");
+    await notesCollection.insertOne(note);
+  }
+  catch(error){
+    throw new Error(error.message);
+  }
+  finally {
+    await client.close();
+  } 
   return note;
 };
-const changeNote = (note: Note): Note => {
+const changeNote = async (note: Note): Promise<Note> => {
+  try{
+    await client.connect();
+    const database = client.db("notes");
+    const notesCollection = database.collection("notes");
+    await notesCollection.updateOne({id: note.id}, { $set: note});
+  }
+  catch(error){
+    throw new Error(error.message);
+  }
+  finally {
+    await client.close();
+  } 
   return note;
 };
-const deleteNote = (id:string):string=>{
-    return id;
-}
-export const notesApi ={
-    allNotes,
-    addNote,
-    changeNote,
-    deleteNote
-}
+const deleteNote = async (id: string): Promise<string> => {
+  try{
+    await client.connect();
+    const database = client.db("notes");
+    const notesCollection = database.collection("notes");
+    await notesCollection.deleteOne({id: id});
+  }
+  catch(error){
+    throw new Error(error.message);
+  }
+  finally {
+    await client.close();
+  } 
+  return id;
+};
+
+export const notesApi = {
+  allNotes,
+  addNote,
+  changeNote,
+  deleteNote,
+};

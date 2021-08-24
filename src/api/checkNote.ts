@@ -14,7 +14,7 @@ export const checkNote = (addedNote:Note, requestBody:any, response: express.Res
       console.log(error.message);
       response
         .status(400)
-        .send(JSON.stringify({ errorMessage: error.message }, null, 3));
+        .send(JSON.stringify({ message: error.message }, null, 3));
         return false;        
     }
     return true;
