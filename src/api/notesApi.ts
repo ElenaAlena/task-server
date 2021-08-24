@@ -1,9 +1,11 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
 
 import { Note } from "../config/note";
 
-const uri =
-  "mongodb+srv://Alena:cvbncvbn@cluster0.sdybg.mongodb.net/ITECHART-LAB-NODEJS?retryWrites=true&w=majority";
+dotenv.config();
+
+const uri = process.env.DB_CONN;
 const client = new MongoClient(uri);
 
 const notes: Array<Note> = [];
@@ -11,48 +13,42 @@ const allNotes = (): Array<Note> => {
   return notes;
 };
 const addNote = async (note: Note): Promise<Note> => {
-  try{
+  try {
     await client.connect();
     const database = client.db("notes");
     const notesCollection = database.collection("notes");
     await notesCollection.insertOne(note);
-  }
-  catch(error){
+  } catch (error) {
     throw new Error(error.message);
-  }
-  finally {
+  } finally {
     await client.close();
-  } 
+  }
   return note;
 };
 const changeNote = async (note: Note): Promise<Note> => {
-  try{
+  try {
     await client.connect();
     const database = client.db("notes");
     const notesCollection = database.collection("notes");
-    await notesCollection.updateOne({id: note.id}, { $set: note});
-  }
-  catch(error){
+    await notesCollection.updateOne({ id: note.id }, { $set: note });
+  } catch (error) {
     throw new Error(error.message);
-  }
-  finally {
+  } finally {
     await client.close();
-  } 
+  }
   return note;
 };
 const deleteNote = async (id: string): Promise<string> => {
-  try{
+  try {
     await client.connect();
     const database = client.db("notes");
     const notesCollection = database.collection("notes");
-    await notesCollection.deleteOne({id: id});
-  }
-  catch(error){
+    await notesCollection.deleteOne({ id: id });
+  } catch (error) {
     throw new Error(error.message);
-  }
-  finally {
+  } finally {
     await client.close();
-  } 
+  }
   return id;
 };
 
