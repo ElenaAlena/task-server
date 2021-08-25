@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 
 import { Note } from "../config/note";
+import { postfix } from "../utils/environment";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ const addNote = async (note: Note): Promise<Note> => {
     await client.connect();
     const database = client.db("notes");
     const notesCollection = database.collection("notes");
+    note.title = postfix(note.title);
     await notesCollection.insertOne(note);
   } catch (error) {
     throw new Error(error.message);
