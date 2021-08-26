@@ -66,12 +66,16 @@ const checkUser = async (
 };
 
 const getUsers = async () => {
-  let users;
+  let users: Array<User>;
   try {
     await client.connect();
     const database = client.db("notes");
     const collection = database.collection("users");
     users = await collection.find().toArray();
+    users = users.map((item) => {
+      delete item.password;
+      return item;
+    });
   } catch (error) {
     throw new Error(error.message);
   } finally {
@@ -83,5 +87,5 @@ const getUsers = async () => {
 export const authApi = {
   addUser,
   checkUser,
-  getUsers
+  getUsers,
 };

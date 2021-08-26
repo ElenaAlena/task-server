@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 
 import getGreeting from "./modules/greeting/controllers/getGreeting";
 import defaultHandler from "./modules/home/controllers/gethome";
@@ -11,6 +12,7 @@ const app = express();
 const jsonParser = express.json();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(logger);
 
 app.get(ROUTES.home, asyncHandler(defaultHandler));
