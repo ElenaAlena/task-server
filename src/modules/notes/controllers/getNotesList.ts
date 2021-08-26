@@ -31,7 +31,7 @@ const changeNote = (request: express.Request, response: express.Response) => {
         response.send(note);
       })
       .catch((error: Error) => {
-        response.sendStatus(500).send({ message: error.message });
+        response.status(500).send({ message: error.message });
       });
   }
 };
@@ -42,7 +42,7 @@ const deleteNote = (request: express.Request, response: express.Response) => {
       response.send(`{ success: true, id: ${id} }`);
     })
     .catch((error: Error) => {
-      response.sendStatus(500).send({ message: error.message });
+      response.status(500).send({ message: error.message });
     });
 };
 

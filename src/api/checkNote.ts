@@ -8,7 +8,8 @@ export const checkNote = (addedNote:Note, requestBody:any, response: express.Res
       addedNote.title = requestBody.title;
       addedNote.content = requestBody.content;
       addedNote.createdAt = requestBody.createdAt;
-      addedNote.updatedAt = requestBody.updatedAt;
+      addedNote.updatedAt = requestBody.updatedAt;      
+      addedNote.email = requestBody.email;
       validate(addedNote);
     } catch (error) {
       console.log(error.message);

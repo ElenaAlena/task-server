@@ -12,4 +12,5 @@ export class Note {
   @required()
   createdAt: string; //, - дата создания заметки  
   updatedAt: string; // - дата обновления заметки, может быть пустым
+  email:string;
 }

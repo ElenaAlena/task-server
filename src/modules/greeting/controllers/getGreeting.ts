@@ -1,6 +1,6 @@
 import express from "express";
 
-const getGreeting = (request: express.Request, response: express.Response) => {
+const getGreeting = (request: express.Request, response: express.Response):void => {
   const userName = request.query.name;
   if (userName === undefined) {
     response.setHeader("Content-Type", "application/json");

@@ -6,3 +6,4 @@ export const dateFormatter = (): string =>
 export const hasValue = (property: any): boolean => {
   return property !== void 0 && property !== null;
 };
+
